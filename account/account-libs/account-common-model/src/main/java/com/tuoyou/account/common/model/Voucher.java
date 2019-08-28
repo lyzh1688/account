@@ -8,15 +8,10 @@ import java.time.LocalDate;
 public class Voucher {
 
     LocalDate accountDate;
-    String voucherType;
-    long sequence;
+    String category;
     int attachmentCount;
     String remark;
     String account;
-    //借方
-    String debit;
-    //贷方
-    String credit;
 
     public LocalDate getAccountDate() {
         return accountDate;
@@ -24,22 +19,6 @@ public class Voucher {
 
     public void setAccountDate(LocalDate accountDate) {
         this.accountDate = accountDate;
-    }
-
-    public String getVoucherType() {
-        return voucherType;
-    }
-
-    public void setVoucherType(String voucherType) {
-        this.voucherType = voucherType;
-    }
-
-    public long getSequence() {
-        return sequence;
-    }
-
-    public void setSequence(long sequence) {
-        this.sequence = sequence;
     }
 
     public int getAttachmentCount() {
@@ -66,19 +45,4 @@ public class Voucher {
         this.account = account;
     }
 
-    public String getDebit() {
-        return debit;
-    }
-
-    public void setDebit(String debit) {
-        this.debit = debit;
-    }
-
-    public String getCredit() {
-        return credit;
-    }
-
-    public void setCredit(String credit) {
-        this.credit = credit;
-    }
 }

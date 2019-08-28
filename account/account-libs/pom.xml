@@ -15,6 +15,7 @@
         <module>account-srcfile-parser</module>
         <module>account-common-dict</module>
         <module>account-common-model</module>
+        <module>account-voucher-core</module>
     </modules>
 
 
