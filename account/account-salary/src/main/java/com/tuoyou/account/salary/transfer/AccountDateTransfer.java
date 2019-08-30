@@ -1,21 +1,22 @@
 package com.tuoyou.account.salary.transfer;
 
+import com.tuoyou.account.common.utils.DateUtils;
 import com.tuoyou.account.salary.domain.SalaryStatementRecord;
 import com.tuoyou.account.salary.extractor.SalaryStatementDtlRecordExtractor;
 import com.tuoyou.account.voucher.core.Extractor;
 import com.tuoyou.account.voucher.core.VoucherTransfer;
 
+import java.time.LocalDate;
+
 /**
- * Created by 刘悦之 on 2019/8/28.
- *
- * 摘要生成规则
+ * Created by liuyuezhi on 2019/8/29.
  */
-public class RemarkTransfer implements VoucherTransfer {
+public class AccountDateTransfer implements VoucherTransfer {
 
-    final String schema = "计提%s%s年%s月工资";
-
-    private String fillInSchema(SalaryStatementRecord record){
-        return String.format(this.schema,record.getName(),record.getAccountPeriod().substring(0,4),record.getAccountPeriod().substring(4));
+    private String getLastDayOfMonth(String accountMonth){
+        LocalDate localDate = DateUtils.parseDate(accountMonth + "01",DateUtils.SIMPLE_8_FORMATTER);
+        LocalDate lastDayOfMonth = localDate.plusMonths(1).minusDays(1);
+        return DateUtils.formatDate(lastDayOfMonth,DateUtils.SIMPLE_8_FORMATTER);
     }
 
     @Override
@@ -23,7 +24,7 @@ public class RemarkTransfer implements VoucherTransfer {
         if(extractor instanceof SalaryStatementDtlRecordExtractor){
             SalaryStatementDtlRecordExtractor salaryStatementDtlRecordExtractor = (SalaryStatementDtlRecordExtractor)extractor;
             SalaryStatementRecord record = salaryStatementDtlRecordExtractor.extract();
-            return fillInSchema(record);
+            return getLastDayOfMonth(record.getAccountPeriod());
         }
         else
             throw new Exception("SalaryStatementDtlRecordExtractor required ");
@@ -34,7 +35,7 @@ public class RemarkTransfer implements VoucherTransfer {
         if(extractor instanceof SalaryStatementDtlRecordExtractor){
             SalaryStatementDtlRecordExtractor salaryStatementDtlRecordExtractor = (SalaryStatementDtlRecordExtractor)extractor;
             SalaryStatementRecord record = salaryStatementDtlRecordExtractor.extract();
-            return fillInSchema(record);
+            return getLastDayOfMonth(record.getAccountPeriod());
         }
         else
             throw new Exception("SalaryStatementDtlRecordExtractor required ");

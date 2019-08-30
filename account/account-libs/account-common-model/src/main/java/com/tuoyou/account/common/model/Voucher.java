@@ -5,13 +5,35 @@ import java.time.LocalDate;
 /**
  * Created by liuyuezhi on 2019/8/28.
  */
-public class Voucher {
+public class Voucher{
 
     LocalDate accountDate;
+
     String category;
+
     int attachmentCount;
+
     String remark;
+
     String account;
+    //借贷类型
+    String voucherType;
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getVoucherType() {
+        return voucherType;
+    }
+
+    public void setVoucherType(String voucherType) {
+        this.voucherType = voucherType;
+    }
 
     public LocalDate getAccountDate() {
         return accountDate;
