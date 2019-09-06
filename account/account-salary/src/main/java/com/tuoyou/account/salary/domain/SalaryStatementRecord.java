@@ -81,6 +81,7 @@ public class SalaryStatementRecord {
 
     private BigDecimal individualIncomeTax;
 
+    //实发工资
     private BigDecimal netWages;
 
     private String bankCard;

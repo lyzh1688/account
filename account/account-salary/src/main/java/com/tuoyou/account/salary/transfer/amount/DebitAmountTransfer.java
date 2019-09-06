@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 
 /**
  * Created by liuyuezhi on 2019/8/30.
- * 工资总额 + sum(五险一金公司部分)
+ * 借方 [工资总额 + sum(五险一金公司部分)]
  */
 public class DebitAmountTransfer implements VoucherTransfer,SalaryStatementRecordHelper {
     @Override
