@@ -1,5 +1,6 @@
 package com.tuoyou.account.salary.loader;
 
+import com.account.common.dict.VoucherType;
 import com.tuoyou.account.common.model.Voucher;
 import com.tuoyou.account.salary.domain.SalaryStatementRecord;
 import com.tuoyou.account.salary.transfer.AccountDateTransfer;
@@ -7,12 +8,16 @@ import com.tuoyou.account.salary.transfer.AttachmentCounterTransfer;
 import com.tuoyou.account.salary.transfer.CategoryTransfer;
 import com.tuoyou.account.salary.transfer.RemarkTransfer;
 import com.tuoyou.account.voucher.core.Extractor;
+import com.tuoyou.account.voucher.core.Loader;
 import com.tuoyou.account.voucher.core.VoucherTransfer;
+import org.apache.commons.lang3.StringUtils;
+
+import java.math.BigDecimal;
 
 /**
  * Created by 刘悦之 on 2019/9/6.
  */
-public abstract class RowLoader implements Loader<SalaryStatementRecord>{
+public abstract class RowLoader implements Loader<SalaryStatementRecord,Voucher> {
     protected VoucherTransfer accountDateTransfer;
     protected VoucherTransfer categoryTransfer;
     protected VoucherTransfer attachmentCounterTransfer;
@@ -33,32 +38,46 @@ public abstract class RowLoader implements Loader<SalaryStatementRecord>{
     protected abstract VoucherTransfer initAmountTransfer();
     protected abstract String getVoucherType();
 
-    public Voucher createVoucher(Extractor<SalaryStatementRecord> extractor){
+    public Voucher createVoucher(Extractor<SalaryStatementRecord> extractor) throws Exception {
         Voucher voucher = new Voucher();
-        return voucher;
-    }
-
-    public VoucherTransfer getAccountDateTransfer() {
-        return accountDateTransfer;
-    }
-
-    public VoucherTransfer getCategoryTransfer() {
-        return categoryTransfer;
-    }
-
-    public VoucherTransfer getAttachmentCounterTransfer() {
-        return attachmentCounterTransfer;
-    }
-
-    public VoucherTransfer getRemarkTransfer() {
-        return remarkTransfer;
-    }
-
-    public VoucherTransfer getAccountCodeTransfer() {
-        return accountCodeTransfer;
-    }
-
-    public VoucherTransfer getAmountTransfer() {
-        return amountTransfer;
+        voucher.setVoucherType(getVoucherType());
+        if(VoucherType.credit.equals(getVoucherType())){
+            String accountCode = this.accountCodeTransfer.creditGenerator(extractor);
+            if(StringUtils.isNotEmpty(accountCode)){
+                String accountDate = this.accountDateTransfer.creditGenerator(extractor);
+                String category = this.categoryTransfer.creditGenerator(extractor);
+                String attachmentCounter = this.attachmentCounterTransfer.creditGenerator(extractor);
+                String remark = this.remarkTransfer.creditGenerator(extractor);
+                String amount = this.amountTransfer.creditGenerator(extractor);
+                voucher.setAccountCode(accountCode);
+                voucher.setAccountDate(accountDate);
+                voucher.setCategory(category);
+                voucher.setAttachmentCount(Integer.valueOf(attachmentCounter));
+                voucher.setRemark(remark);
+                voucher.setAmount(new BigDecimal(amount));
+                return voucher;
+            }
+            else
+                return null;
+        }
+        else {
+            String accountCode = this.accountCodeTransfer.debitGenerator(extractor);
+            if(StringUtils.isNotEmpty(accountCode)){
+                String accountDate = this.accountDateTransfer.debitGenerator(extractor);
+                String category = this.categoryTransfer.debitGenerator(extractor);
+                String attachmentCounter = this.attachmentCounterTransfer.debitGenerator(extractor);
+                String remark = this.remarkTransfer.debitGenerator(extractor);
+                String amount = this.amountTransfer.debitGenerator(extractor);
+                voucher.setAccountCode(accountCode);
+                voucher.setAccountDate(accountDate);
+                voucher.setCategory(category);
+                voucher.setAttachmentCount(Integer.valueOf(attachmentCounter));
+                voucher.setRemark(remark);
+                voucher.setAmount(new BigDecimal(amount));
+                return voucher;
+            }
+            else
+                return null;
+        }
     }
 }

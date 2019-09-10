@@ -1,5 +1,6 @@
 package com.tuoyou.account.common.model;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 /**
@@ -7,7 +8,7 @@ import java.time.LocalDate;
  */
 public class Voucher{
 
-    LocalDate accountDate;
+    String accountDate;
 
     String category;
 
@@ -15,9 +16,28 @@ public class Voucher{
 
     String remark;
 
-    String account;
     //借贷类型
     String voucherType;
+
+    String accountCode;
+
+    BigDecimal amount;
+
+    public BigDecimal getAmount() {
+        return amount;
+    }
+
+    public void setAmount(BigDecimal amount) {
+        this.amount = amount;
+    }
+
+    public String getAccountCode() {
+        return accountCode;
+    }
+
+    public void setAccountCode(String accountCode) {
+        this.accountCode = accountCode;
+    }
 
     public String getCategory() {
         return category;
@@ -35,11 +55,11 @@ public class Voucher{
         this.voucherType = voucherType;
     }
 
-    public LocalDate getAccountDate() {
+    public String getAccountDate() {
         return accountDate;
     }
 
-    public void setAccountDate(LocalDate accountDate) {
+    public void setAccountDate(String accountDate) {
         this.accountDate = accountDate;
     }
 
@@ -57,14 +77,6 @@ public class Voucher{
 
     public void setRemark(String remark) {
         this.remark = remark;
-    }
-
-    public String getAccount() {
-        return account;
-    }
-
-    public void setAccount(String account) {
-        this.account = account;
     }
 
 }

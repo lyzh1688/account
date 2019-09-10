@@ -36,6 +36,13 @@ public class SalaryVoucherGenerator implements VoucherGenerator<SalaryStatementR
 
     @Override
     public List<Voucher> generator(Extractor extractor) {
-        return this.loaderList.stream().map(i -> i.createVoucher(extractor)).collect(Collectors.toList());
+        return this.loaderList.stream().map(i -> {
+            try {
+                return i.createVoucher(extractor);
+            } catch (Exception e) {
+                e.printStackTrace();
+                return null;
+            }
+        }).filter(i -> i != null).collect(Collectors.toList());
     }
 }
