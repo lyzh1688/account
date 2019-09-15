@@ -8,3 +8,4 @@ account/account-salary/target/*
 account/account-libs/account-voucher-core/target/*
 account/account-salary-runner/target/*
 account/account-libs/account-common-model/target/*
+account/account-libs/account-common-utils/target/*
