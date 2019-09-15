@@ -2,3 +2,9 @@
 *.iml
 *.iml
 account/*/*.iml
+account/account-salary/target/classes/com/tuoyou/account/*/*/*.class
+account/account-libs/account-common-dict/target/classes/*
+account/account-salary/target/*
+account/account-libs/account-voucher-core/target/*
+account/account-salary-runner/target/*
+account/account-libs/account-common-model/target/*

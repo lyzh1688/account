@@ -31,6 +31,12 @@ public interface SalaryStatementRecordHelper {
         return sumRet;
     }
 
+    default BigDecimal sumCompanyInsuranceAndCompHabitationIns(SalaryStatementRecord record){
+        BigDecimal sumRet = this.sumCompanyInsurance(record.getEndowmentInsCom(), record.getUnemployInsCom(), record.getMedicalInsCom(), record.getInjuryInsCom(), record.getBirthInsCom());
+        sumRet = sumRet.add(record.getHabitationInsCom() != null ? record.getHabitationInsCom() : BigDecimal.ZERO);
+        return sumRet;
+    }
+
     default BigDecimal sumCompanyInsurance(BigDecimal endowmentInsCom,
                                            BigDecimal unemployInsCom,
                                            BigDecimal medicalInsCom,

@@ -20,7 +20,7 @@ public class DebitAmountTransfer implements VoucherTransfer,SalaryStatementRecor
             SalaryStatementDtlRecordExtractor salaryStatementDtlRecordExtractor = (SalaryStatementDtlRecordExtractor) extractor;
             SalaryStatementRecord record = salaryStatementDtlRecordExtractor.extract();
             BigDecimal ret = BigDecimal.ZERO;
-            ret = ret.add(this.sumCompanyInsurance(record));
+            ret = ret.add(this.sumCompanyInsuranceAndCompHabitationIns(record));
             ret = ret.add(record.getTotalWages() != null ? record.getTotalWages() : BigDecimal.ZERO);
             if(ret.compareTo(BigDecimal.ZERO) > 0){
                 return ret.toPlainString();

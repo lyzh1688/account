@@ -79,4 +79,14 @@ public class Voucher{
         this.remark = remark;
     }
 
+    @Override
+    public String toString() {
+        return "accountDate='" + accountDate + '\'' +
+                ", category='" + category + '\'' +
+                ", attachmentCount=" + attachmentCount +
+                ", remark='" + remark + '\'' +
+                ", voucherType='" + voucherType + '\'' +
+                ", accountCode='" + accountCode + '\'' +
+                ", amount=" + amount ;
+    }
 }

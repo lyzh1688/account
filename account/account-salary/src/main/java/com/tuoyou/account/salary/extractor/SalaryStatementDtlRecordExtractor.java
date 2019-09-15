@@ -22,15 +22,27 @@ public class SalaryStatementDtlRecordExtractor implements Extractor<SalaryStatem
 
     BlockingQueue<SalaryStatementRecord> recordsBuffer = new ArrayBlockingQueue(2000);
 
+    SalaryStatementRecord snapshot = null;
+
+    @Override
+    public void take() throws InterruptedException {
+        this.snapshot = recordsBuffer.take();
+    }
+
     @Override
     public SalaryStatementRecord extract() throws InterruptedException {
-        return recordsBuffer.take();
+        if(this.snapshot != null){
+            return this.snapshot;
+        }
+        else
+            return null;
     }
 
     @Override
     public void fillIn(List<SalaryStatementRecord> records) {
         records.stream().forEach(i -> {
             try {
+                System.out.println(i.toString());
                 recordsBuffer.put(i);
             } catch (InterruptedException e) {
                 logger.error(e.getMessage());

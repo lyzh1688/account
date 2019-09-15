@@ -9,5 +9,5 @@ import java.util.List;
  * Created by 刘悦之 on 2019/9/6.
  */
 public interface VoucherGenerator<RECORD> {
-    List<Voucher> generator(Extractor<RECORD> extractor);
+    List<Voucher> generator(Extractor<RECORD> extractor) throws InterruptedException;
 }

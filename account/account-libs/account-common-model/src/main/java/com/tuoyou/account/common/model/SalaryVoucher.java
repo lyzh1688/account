@@ -7,9 +7,9 @@ public class SalaryVoucher extends Voucher{
 
     //制单
     String creator;
-    //员工性质
+    //员工性质(票号)
     String employeeType;
-    //交易对手方
+    //交易对手方(姓名)
     String counterParty;
 
     public String getCreator() {
@@ -34,5 +34,13 @@ public class SalaryVoucher extends Voucher{
 
     public void setEmployeeType(String employeeType) {
         this.employeeType = employeeType;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() + '\'' +
+                "creator='" + creator + '\'' +
+                ", employeeType='" + employeeType + '\'' +
+                ", counterParty='" + counterParty + '\'';
     }
 }

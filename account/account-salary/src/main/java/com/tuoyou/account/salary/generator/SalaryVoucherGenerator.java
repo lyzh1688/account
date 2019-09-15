@@ -35,7 +35,8 @@ public class SalaryVoucherGenerator implements VoucherGenerator<SalaryStatementR
     }
 
     @Override
-    public List<Voucher> generator(Extractor extractor) {
+    public List<Voucher> generator(Extractor extractor) throws InterruptedException {
+        extractor.take();
         return this.loaderList.stream().map(i -> {
             try {
                 return i.createVoucher(extractor);
