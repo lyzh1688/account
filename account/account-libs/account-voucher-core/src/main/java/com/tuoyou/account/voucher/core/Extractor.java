@@ -9,4 +9,5 @@ public interface Extractor<R> {
     void take() throws InterruptedException;
     R extract() throws InterruptedException;
     void fillIn(List<R> records);
+    int getBufferCount();
 }

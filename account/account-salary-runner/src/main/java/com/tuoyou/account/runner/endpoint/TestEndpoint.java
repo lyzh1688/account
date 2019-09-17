@@ -16,6 +16,6 @@ public class TestEndpoint {
 
     @RequestMapping("/test")
     public void test(){
-        salaryStatementDtlService.fillInExtractor(salaryStatementDtlService.getSalaryStatementDtl());
+        salaryStatementDtlService.fillInExtractor(salaryStatementDtlService.getSalaryStatementDtl("5gpr5pvl6qg0000"));
     }
 }

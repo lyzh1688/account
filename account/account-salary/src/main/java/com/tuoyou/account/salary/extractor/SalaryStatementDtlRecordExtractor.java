@@ -49,4 +49,9 @@ public class SalaryStatementDtlRecordExtractor implements Extractor<SalaryStatem
             }
         });
     }
+
+    @Override
+    public int getBufferCount() {
+        return recordsBuffer.size();
+    }
 }

@@ -2,9 +2,11 @@ package com.tuoyou.account.runner.service.impl;
 
 import com.account.common.dict.EmployeeType;
 import com.google.common.collect.Lists;
+import com.tuoyou.account.runner.dao.SalaryStatementDao;
 import com.tuoyou.account.runner.service.SalaryStatementDtlService;
 import com.tuoyou.account.salary.domain.SalaryStatementRecord;
 import com.tuoyou.account.salary.extractor.SalaryStatementDtlRecordExtractor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -15,6 +17,9 @@ import java.util.List;
  */
 @Service
 public class SalaryStatementDtlServiceImpl implements SalaryStatementDtlService {
+
+    @Autowired
+    SalaryStatementDao salaryStatementDao;
 
     @Deprecated
     private SalaryStatementRecord createSalaryStatementRecord(String[] info){
@@ -50,7 +55,7 @@ public class SalaryStatementDtlServiceImpl implements SalaryStatementDtlService 
 
     @Override
     public List<SalaryStatementRecord> getSalaryStatementDtl(String batchId) {
-        return null;
+        return salaryStatementDao.getSalaryStatement(batchId);
     }
 
     @Override

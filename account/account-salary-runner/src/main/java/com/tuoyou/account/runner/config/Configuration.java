@@ -1,5 +1,6 @@
 package com.tuoyou.account.runner.config;
 
+import com.google.common.eventbus.EventBus;
 import com.tuoyou.account.salary.domain.SalaryStatementRecord;
 import com.tuoyou.account.salary.generator.SalaryVoucherGenerator;
 import com.tuoyou.account.salary.generator.VoucherGenerator;
@@ -14,5 +15,10 @@ public class Configuration {
     @Bean
     public VoucherGenerator<SalaryStatementRecord> salaryVoucherGenerator(){
         return new SalaryVoucherGenerator();
+    }
+
+    @Bean
+    public EventBus eventBus(){
+        return new EventBus();
     }
 }
